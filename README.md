@@ -7,18 +7,17 @@
 
 也可以用以下的內容另存成bat副檔名的檔案，再透過「以系統管理員身分執行」來執行即可。
 
-</script>
-</div>
+@echo off
 
-<p>如果老貓的連結失效，也可以用以下的內容另存成bat副檔名的檔案，再透過「<strong>以系統管理員身分執行</strong>」來執行即可。</p>
-<p><code>@echo off<br>
-pushd "%~dp0"<br>
-dir /b %SystemRoot%\servicing\Packages\<a href="https://iqmore.tw/tag/microsoft" class="st_tag internal_tag " rel="tag" title="Posts tagged with Microsoft">Microsoft</a>-<a href="https://iqmore.tw/tag/windows" class="st_tag internal_tag " rel="tag" title="Posts tagged with Windows">Windows</a>-GroupPolicy-ClientExtensions-Package~3*.mum &gt;List.txt<br>
-dir /b %SystemRoot%\servicing\Packages\<a href="https://iqmore.tw/tag/microsoft" class="st_tag internal_tag " rel="tag" title="Posts tagged with Microsoft">Microsoft</a>-<a href="https://iqmore.tw/tag/windows" class="st_tag internal_tag " rel="tag" title="Posts tagged with Windows">Windows</a>-GroupPolicy-ClientTools-Package~3*.mum &gt;&gt;List.txt<br>
-for /f %%i in ('findstr /i . List.txt 2^&gt;nul') do dism /online /norestart /add-package:"%SystemRoot%\servicing\Packages\%%i"<br>
-pause</code></p><div class="03d217882a668356b98fb52c120f6bd4" data-index="4" style="float: none; margin:10px 0 10px 0; text-align:center;">
-<script type="text/javascript" src="//js1.bloggerads.net/contentads.aspx?blogid=20221015000003" async></script>
-</div>
+pushd "%~dp0"
+
+dir /b %SystemRoot%\servicing\Packages\Microsoft-Windows-GroupPolicy-ClientExtensions-Package~3*.mum >List.txt
+
+dir /b %SystemRoot%\servicing\Packages\Microsoft-Windows-GroupPolicy-ClientTools-Package~3*.mum >>List.txt
+
+for /f %%i in ('findstr /i . List.txt 2^>nul') do dism /online /norestart /add-package:"%SystemRoot%\servicing\Packages\%%i"
+
+pause
 
 
 使用時，針對這個檔案點選右鍵後選擇「以系統管理員身分執行」。
